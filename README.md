@@ -8,6 +8,7 @@ The process is fully automated and consists of the following steps:
 
 A robotic certificate is required for proper functionality. (https://pki.cesnet.cz/cs/tcs-robot.html)
 
+
 The application has three functions depending on the number of parameters.
 * 1 - Generates a basic json file that is used as a list of certificates
   * path to the file
@@ -22,6 +23,9 @@ The application has three functions depending on the number of parameters.
   * path to the robotic certificate
   * Path to the robotic certificate key
   * Path to the file where the intermediate certificates are located 
+
+## Enviroment
+The generated key is encrypted and the password is placed in the PRIVATEPASS variable
 
 ## Example of json file
 ```
@@ -70,3 +74,4 @@ The application has three functions depending on the number of parameters.
  }
 ```
 ## Extension
+The application itself handles the work with certificates, but it is advisable to place it e.g. in a gitlab, where it will be run regularly and the resulting certificates will be safely located.
