@@ -1,4 +1,4 @@
-# Automatic-certificate-management
+# Automatic certificate management
 This project aims to manage existing and new certificates issued by CESNET. Certificates already issued are checked at each start-up and if it is the last month before expiry, a new certificate is requested.
 The process is fully automated and consists of the following steps:
 - Creation of the request.
@@ -22,3 +22,51 @@ The application has three functions depending on the number of parameters.
   * path to the robotic certificate
   * Path to the robotic certificate key
   * Path to the file where the intermediate certificates are located 
+
+## Example of json file
+```
+ {
+   "MainDNS": "Root",
+   "AlternativeDNS": null,
+   "Childs": [
+     {
+       "MainDNS": "cz",
+       "AlternativeDNS": null,
+       "Childs": [
+         {
+           "MainDNS": "vsb",
+           "AlternativeDNS": null,
+           "Childs": [
+             {
+               "MainDNS": "test",
+             },
+             {
+               "MainDNS": "test2",
+               "AlternativeDNS": [
+                 "test3.it4i.cz"
+               ],
+             }
+           ],
+         }
+       ],
+     },
+     {
+       "MainDNS": "tech",
+       "AlternativeDNS": null,
+       "Childs": [
+         {
+           "MainDNS": "lexis",
+           "AlternativeDNS": null,
+           "Childs": [
+             {
+               "MainDNS": "it4i"
+               ],
+            }
+            ],
+         }
+       ],
+     }
+   ],
+ }
+```
+## Extension
