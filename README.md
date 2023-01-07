@@ -75,3 +75,7 @@ The generated key is encrypted and the password is placed in the PRIVATEPASS var
 ```
 ## Extension
 The application itself handles the work with certificates, but it is advisable to place it e.g. in a gitlab, where it will be run regularly and the resulting certificates will be safely located.
+
+# Acknowledgement
+This work was supported by the Ministry of Education, Youth and Sports of the Czech Republic through the e-INFRA CZ (ID:90140).
+
