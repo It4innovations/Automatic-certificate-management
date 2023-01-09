@@ -77,7 +77,7 @@ The generated key is encrypted and the password is placed in the PRIVATEPASS var
 The application itself handles the work with certificates, but it is advisable to place it e.g. in a gitlab, where it will be run regularly and the resulting certificates will be safely located.
 
 # Client part
-It is used for modifying the record, validating already deployed certificates, and simplifying the deployment of new certificates. The application can be run via the included powershell script. 
+It is used for modifying the record, validating already deployed certificates, and simplifying the deployment of new certificates. The application can be run via the included PowerShell script. 
 
 The main menu is as follows:
   - Edit json file
@@ -85,17 +85,18 @@ The main menu is as follows:
   - Upload changes back to git
   - Decode and validate new and deployed certificates
 
-##
+
 All options and settings are applied via menu selections.
 
-Description of main features.
-Modifying a JSON file involves adding, changing or removing a record in the file. It also verifies the validity of the record such as validating DNS records or invalid settings. All changes take place in memory.
+## Description of main features
+Modifying a JSON file involves adding, changing, or removing a record in the file. It also verifies the validity of the record such as validating DNS records or invalid settings. All changes take place in memory.
 
 Saving the changes converts the data from memory into a json file.
 
-The data is only stored locally, but still needs to be uploaded to git.
+The data is only stored locally but still needs to be uploaded to git.
 
-The user has to enter a password for the private key and the number of days in the past he wants to authenticate services based on the issued certificates. Then the individual certificates are browsed and it is verified whether the certificate has already been deployed (supported protocols and services are HTTPS, LDAPS, MSSQL). If it is unable to verify validity or the certificate has expired or is about to expire, it temporarily creates decrypted keys in a form suitable for deployment to servers (pem and pfx formats).
+The user has to enter a password for the private key and the number of days in the past he wants to authenticate services based on the issued certificates. Then the individual certificates are browsed and it is verified whether the certificate has already been deployed (supported protocols and services are HTTPS, LDAPS, MSSQL). If it is unable to verify the validity or the certificate has expired or is about to expire, it temporarily creates decrypted keys in a form suitable for deployment to servers (pem and pfx formats).
+
 
 
 # Acknowledgement
