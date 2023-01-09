@@ -1,4 +1,5 @@
-﻿using Functions;
+﻿using CoreCG.DataStructures;
+using CoreCG.Functions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,7 @@ namespace CertificatesGenerator.DataStructures
         private readonly string pathtocertificate;
         private readonly string certificatePassword;
 
-        //Email address for notify from cesnet
-        private readonly string[] emails = { "test@vsb.cz" };
-        private readonly string requesterPhone ="+420123456789";
+        private readonly string[] emails = { "support@it4i.cz" };
 
         private readonly DNSTree tree;
 
@@ -155,7 +154,7 @@ namespace CertificatesGenerator.DataStructures
             InitConfigurationFiles(path, tempMainDNS, dNSTree.AlternativeDNS);
 
             GenerateRequest(path);
-
+         
             SendRequest(path);
 
         }
@@ -282,7 +281,7 @@ namespace CertificatesGenerator.DataStructures
                 cert.notificationMail.Add(item);
             }
 
-            cert.requesterPhone = requesterPhone;
+            cert.requesterPhone = "+420597329617";
 
             string json = JsonConvert.SerializeObject(cert);
             StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -322,6 +321,7 @@ namespace CertificatesGenerator.DataStructures
                 ClientCertificateOptions = ClientCertificateOption.Manual,
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
+            //handler.SslProtocols = SslProtocols.Tls12;
             handler.ClientCertificates.Add(new X509Certificate2(pathtocertificate, certificatePassword));
 
 
@@ -395,7 +395,7 @@ namespace CertificatesGenerator.DataStructures
 
             text += "\n Best Regards\n\t\t Administrators";
 
-            Email.SendEmail(emails, null, "support@vsb.cz", "Status of certificate", text);
+            Email.SendEmail(emails, null, "voj189@vsb.cz", "Status of certificate", text);
         }
 
         public void TestRequest(int v)
@@ -485,23 +485,22 @@ namespace CertificatesGenerator.DataStructures
                 MainDNS = "vsb"
             };
 
-            DNSTree test = new DNSTree
+            DNSTree floreonwia = new DNSTree
             {
-                MainDNS = "test"
+                MainDNS = "floreonwia"
             };
 
-            DNSTree test2 = new DNSTree
+            DNSTree adasnext = new DNSTree
             {
-                MainDNS = "test2",
+                MainDNS = "adasnext",
                 AlternativeDNS = new List<string>()
             };
-            test2.AlternativeDNS.Add("test3.it4i.cz");
-
+            adasnext.AlternativeDNS.Add("nextcloud.it4i.cz");
 
             vsb.Childs = new List<DNSTree>
             {
-                test,
-                test2
+                floreonwia,
+                adasnext
             };
 
             cz.Childs = new List<DNSTree>
@@ -519,14 +518,41 @@ namespace CertificatesGenerator.DataStructures
                 MainDNS = "lexis"
             };
 
-            DNSTree doc = new DNSTree
+            DNSTree it4i = new DNSTree
             {
-                MainDNS = "doc"
+                MainDNS = "it4i"
             };
-           
+
+            DNSTree ystia = new DNSTree
+            {
+                MainDNS = "ystia"
+            };
+
+            DNSTree msad = new DNSTree
+            {
+                MainDNS = "msad"
+            };
+
+            DNSTree monitoring = new DNSTree
+            {
+                MainDNS = "monitoring",            
+            };
+
+            msad.Childs = new List<DNSTree>
+            {
+                monitoring
+            };
+
+
+            it4i.Childs = new List<DNSTree>
+            {
+                msad,
+                ystia
+            };
+
             lexis.Childs = new List<DNSTree>
             {
-                doc
+                it4i
             };
 
             tech.Childs = new List<DNSTree>

@@ -1,0 +1,17 @@
+default_bits            = 2048
+distinguished_name      = req_distinguished_name
+string_mask             = nombstr
+prompt                  = no
+req_extensions          = req_ext
+
+[req_distinguished_name]
+countryName             = CZ
+organizationName        = VSB-Technical University of Ostrava
+commonName              = <REPLACEME>
+
+
+[req_ext]
+subjectAltName          = @san
+
+[san]
+DNS.0                   = <REPLACEME>

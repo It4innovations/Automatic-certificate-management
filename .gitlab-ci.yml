@@ -1,0 +1,22 @@
+stages:
+    - run
+ 
+run:
+ image: mcr.microsoft.com/dotnet/core/sdk:3.1
+ stage: run
+ only:
+  - schedules
+ script:
+  - cd ./CertificatesGenerator
+  - "dotnet build --configuration Release"
+  - cd ./CertificatesGenerator/bin/Release/netcoreapp3.1/
+  - "dotnet CertificatesGenerator.dll $PATHJSONFILE $PATHTOOUTPUT $PATHTOTEMPLATE $PATHTOROBOT $robotpass $PATHTOCHAIN"
+  - cd /builds/internal-services/certificates/
+  - git config user.email "<email>"
+  - git config user.name "CI Pipeline"
+  - git add .
+  - if [ ! -n "$(git status --porcelain)"  ]; then exit 0;  fi
+  - git commit -m "committing changes"
+  - echo $CI_COMMIT_REF_NAME
+  - git remote set-url --push origin "https://$ROBOTPUSH:$ROBOTPUSHTOKEN@<PATH>/certificates.git/"
+  - git push origin HEAD:$CI_COMMIT_REF_NAME
